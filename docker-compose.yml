@@ -1,0 +1,35 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16.1-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      TZ: UTC
+      PGTZ: UTC
+    volumes: 
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - default
+  
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: fabiano
+      MONGO_INITDB_ROOT_PASSWORD: fabiano
+    volumes:
+      - ./mongodb/db_data/:/data/db/
+    networks:
+       - default
+
+volumes:
+  postgres:
+    driver: local
+  mongodb:
+    driver: local
