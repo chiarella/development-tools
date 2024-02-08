@@ -11,6 +11,8 @@ services:
       PGTZ: UTC
     volumes: 
       - postgres:/var/lib/postgresql/data
+      # copy the sql script to create schema and tables
+      - ./postgres/sql/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
     networks:
       - default
   
@@ -24,7 +26,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: fabiano
       MONGO_INITDB_ROOT_PASSWORD: fabiano
     volumes:
-      - ./mongodb/db_data/:/data/db/
+      - ./mongodb/db_data/:/data/db/      
     networks:
        - default
 
