@@ -50,7 +50,13 @@ services:
       - ./keycloak/providers:/opt/jboss/keycloak/providers
       - ./keycloak/standalone/configuration:/opt/jboss/keycloak/standalone/configuration
     depends_on:
-      - postgres       
+      - postgres    
+
+  redis:
+    image: "redis:latest"
+    container_name: "redis"
+    ports:
+      - "6379:6379"
 
 volumes:
   postgres:
